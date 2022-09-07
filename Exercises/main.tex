@@ -1,0 +1,145 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{tikz-network}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\title{Linear algebra\\ Exercises}
+\date{2022}
+\author{Kristoffer Klokker}
+
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{HTML}{C42043}
+\definecolor{backcolour}{HTML}{F2F2F2}
+\definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+\color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\numberstyle,
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=3,
+}
+\lstset{style=mystyle}
+\usepackage{zref-base}
+
+\makeatletter
+\newcounter{mylstlisting}
+\newcounter{mylstlines}
+\lst@AddToHook{PreSet}{%
+  \stepcounter{mylstlisting}%
+  \ifnum\mylstlines=1\relax
+    \lstset{numbers=none}
+  \else
+    \lstset{numbers=left}
+  \fi
+  \setcounter{mylstlines}{0}%
+}
+\lst@AddToHook{EveryPar}{%
+  \stepcounter{mylstlines}%
+}
+\lst@AddToHook{ExitVars}{%
+  \begingroup
+    \zref@wrapper@immediate{%
+      \zref@setcurrent{default}{\the\value{mylstlines}}%
+      \zref@labelbyprops{mylstlines\the\value{mylstlisting}}{default}%
+    }%
+  \endgroup
+}
+
+% \mylstlines print number of lines inside listing caption
+\newcommand*{\mylstlines}{%
+  \zref@extractdefault{mylstlines\the\value{mylstlisting}}{default}{0}%
+}
+\makeatother
+
+
+\newcommand\numberstyle[1]{%
+    \footnotesize
+    \color{codegray}%
+    \ttfamily
+    \ifnum#1<10 0\fi#1 |%
+}
+
+
+\begin{document}
+	\maketitle
+	\clearpage
+	\tableofcontents
+	\clearpage
+	\section{Week 46}
+		\subsection{Which equation are linear in $x_1$, $x_2$ and $x_3$}
+			\subsubsection{$x_1+5x_2-\sqrt{2}x^3=1$}
+				This is a linear equation
+			\subsubsection{$x_1=-7x_2+3x_3$}
+				This is a linear equation
+			\subsubsection{$x_1^{3/5}-2x_2+x_3=4$}
+				This is not a linear equation with $x_1$ having a power
+		\subsection{Convert from matrix form to equation form}
+			$\begin{bmatrix}
+				2 & 0 & 0 \\
+				3 & -4 & 0\\
+				0 & 1 & 1 
+			\end{bmatrix}$\\
+			$2x_1=0$\\
+			$3x_1-4x_2=0$\\
+			$x_2=1$
+		\subsection{Convert from equations to matrix}
+			$-6x_1-x_2+3x_3=4$\\
+			$5x_2-x_3=1$\\
+			$\begin{bmatrix}
+				-6 & -1 & 3 & 4 \\
+				0 & 5 & -1 & 1
+			\end{bmatrix}$
+		\subsection{Determine if the solution hold in the following system}
+			$(5,8,1)$\\
+			$x+2y-2z=3$\\
+			$3x-y+z=1$\\
+			$-x+5y-5z=5$\\[4mm]
+			$5+2(8)-2(1)=3$\\
+			$19=3$\\
+			By the first equation the solution does not hold
+		\subsection{Determine if the following matrices are in echoleon form or reduced echelon form}
+			$\begin{bmatrix}
+				1 & 0 & 0 \\
+				0 & 1 & 0\\
+				0 & 0 & 1 
+			\end{bmatrix}$\\
+			Reduced echelon form\\
+			$\begin{bmatrix}
+				1 & -3 & 4 & 7 \\
+				0 & 1 & 2 & 2\\
+				0 & 0 & 1  & 5
+			\end{bmatrix}$\\
+			Echelon form
+			
+			
+\end{document}

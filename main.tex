@@ -110,17 +110,17 @@
 		\end{bmatrix}$$
 		When solving a system their may be
 		\begin{itemize}
-			\item No solutions - No possible value can be assigned to the variable such all equation are true
-			\item One solution - A combination of values can be assigned to make every equation true
-			\item Infinite solutions - One or more unknows may have an infinite amount of possible assignable values
+			\item No solutions - No possible value can be assigned to the variable such all equation are true (inconsistent)
+			\item One solution - A combination of values can be assigned to make every equation true (consistent)
+			\item Infinite solutions - One or more unknows may have an infinite amount of possible assignable values (consistent)
 		\end{itemize}
-		By transforming a system of equations to a matrice, the following operations can be performed:
+		By transforming a system of equations to a matrice, the following row operations can be performed:
 		\begin{itemize}
 			\item Multiply a row through by a nonzero constant.
 			\item Interchange two rows.
 			\item Add a constant times one row to another.
 		\end{itemize}
-		\subsection{Gaussian Elimination}
+		\subsection{Gauss-Jordan Elimination}
 			Solving a system of equation in a matrice, can be done such the matrice has the following requirements
 			\begin{itemize}
 				\item If the row contain nothing but zeroes the first number should be a 1, called the leading 1.
@@ -130,8 +130,8 @@
 			\end{itemize}
 			This form is called row echelon form.\\
 			The solution may also be written as:
-			$$x_1=4,x_2=6,x_3=t,x_4=v,x_5=1$$
-			Where variables means they can be any possible asignment or a function with given restrictions.\\
+			$$\{(x_1=4,x_2=6,x_3=t,x_4=v,x_5=1)|t\in \mathbb{R} \}$$
+			Where variables means they can be any possible asignment or a function with given restrictions, called free variables.\\
 			In case of the leading 1 column is zero both above and underneath the matrice is in reduced echlon form.\\[4mm]
 			To make a matrice into echoleon form the following algorithm can be used:\\
 			\begin{enumerate}
@@ -146,5 +146,62 @@
 			In a homogenous linear system if the number of unknows exceed the number of equation there will be an infinite amount of solutions.\\
 			Back substitution is a method taking the echoloen form and starting from the bottom isolating the leading variable and substituting it upwards.\\
 			A echoloen form is not unique to a system but a reduced echoloen form is unique and the number of zero rows will be unique.
-			
+		\subsection{Matrices and Matrix operations}
+			A matrix is a rectangular array of numbers called entries.\\
+			The size of a matrix is written as rows x columns\\
+			A single row matrix is alled a row vector and single column is called column vector.\\
+			Variables in matrices are called scalars and unless stated is in the realm of real numbers.\\
+			When refering to a number in the matrix A it will be $a_{row\;column}$ and the value can be found by $(A)_{row\;column}$\\
+			A matrix scalar matrix can be written as $A=[a_{ij}]_{m\times n}$ the $m\times n$ is optional if the size matters.\\
+			\subsubsection{Matrix operations}
+				Addition/subtraction - every number in corresponding entries are added/subtracted.\\
+				Addtion and subtraction can not be done on two different sized matrices.\\[4mm]
+				Multiplying a matrix with a scalar, is done by multiplying the scalar on every entry.\\
+				For multiplying two matrices an entry is found by $a_{ij}=\sum\limits_{t=0}^n b_{i(j+t)}\cdot c_{(i+t)j}$ where $n$ is the size of row size of matrix $b$ and column size of matrix $c$, if this value does not match the two matrices can not be multiplied.\\
+				The reuslting product matrix of $a = b \times c$ will have the size rows = c columns and columns = b rows\\[4mm]
+				Partioning a matrix is the act of splitting it into a smaller valid matrices. This can be used if only certain entries are wanted for a matrix multiplication\\
+				Linear combinations are an array of matrices (length $n$) of the same size matrix $A$ and an array of scalars (length $n$) $c$ computed as $\sum\limits_{i=o}^n A_i\cdot c_i$\\
+				Multiplying a vector row and a matrix (with approprate lengths) can therefore be expressed as an linear combination.\\
+				Column row expansion is the act of splitting two matrices being multiplied into rows and columns, and then taking the sum of each product of row and column, and thus getting the muiltiplied matrix.\\[4mm]
+				Matrix form of linear system is the act of expressing a linear system in the form of matrix $A$ containing all coefficients, matrix $X$ containing a column vector of all unknown variables, and matrix $B$ which is a column vector of all results of the linear system. in this way the linear system can be expressed as $AX=B$\\
+				Tranposing a matrix is flipping column and rows such in matrix $A$ the entry $a_{ij}$ is now entry $a_{ji}$ in the matrix $A^T$.\\
+				A trace operation of matrix $A$ is taking the addition of the diagonal line called $tr(A)$, can only be performed on square matrices.\\
+				The trace of a square matrix is defined as $tr(A)=a_{11}+a_{22}+...+a_{nn}$ or $tr(A)=\sum\limits_{i=0}^n a_{ii}$\\
+				For the trace the following is true
+				\begin{itemize}
+					\item $tr(A^T)=tr(A)$
+					\item $tr(A\pm B)=tr(A)\pm tr(B)$
+					\item $tr(cA)=c\cdot tr(A)$
+					\item $tr(AB)=tr(BA)$
+				\end{itemize}
+				The matrix polynomials are a way of describing multiple equations in matrix form by\\
+				If $A$ contains all the coefficients, $X$ contains all variables in a column vector, and $B$ contains all constant the equations are equal to in a column vector.\\
+				Then the equations can be described as  $A\cdot X=B$
+		\subsection{Inverses}
+			For matrix operations are the following true, if the size allows for it
+			\begin{itemize}
+				\item Commutative law for matrix addition - $A + B = B + A$
+				\item Associative law for matrix addition - $A + ( B + C) = (A+B)+C$
+				\item Associative law for matrix multiplication - $A(BC)=(AB)C$\\
+				\item Left and Right distributive law - $A(B+C)=AB+AC$
+			\end{itemize}
+			Zero matrices are matrices consisting of only zeros and are denoted by $0_{m\times n}$\\
+			Identity matrix $I$ is the matrix containing 1's on the diagonal, and has the proberty that if multiplies by $A$ the product is $A$.\\
+			The inverse matrix $A^{-1}$ is the matrix $B$ to the square $A$ if $AB=I$, and $A$ is said to be invertible. If $B$ does not exist $A$ is singular\\
+			Only one inverse exist to a matrix.\\
+			For two inverse matrices is the following true $B^{-1}A^{-1}=(AB)^{-1}$.\\
+			Powers if a matrix is defined as expected, and for $A^0=I$ and if $A$ is invertible then $A^{-n}=(A^{-1})^n$\\
+			$A^n$ is invertible and $(A^n)^{-1}=A^{-n}=(A^{-1})^n$\\
+			Matrix pylonomials are inserting a matrix into a polynomial function.\\
+			Transpose if the interchangning of rows in a matrix, and are expressed as $(A^T)^{-1}=(A^{-1})^T$.\\
+			The transposed matrix has the follwoing properties:
+			\begin{itemize}
+				\item $(A^T)^T=A$
+				\item $(A\pm B)^T=A^T\pm B^T$ 
+				\item $(cA)^T=cA^T$
+				\item $(AB)^T=B^TA^T$
+			\end{itemize}
+				
+				
 \end{document}
+
