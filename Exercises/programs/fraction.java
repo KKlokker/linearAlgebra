@@ -14,8 +14,23 @@ public class fraction {
     public void subtract(fraction frac, fraction times) {
         fraction fracCopy = frac.copy();
         fracCopy.multiply(times);
+        numerator = numerator * fracCopy.denominator - (fracCopy.numerator * denominator);
         denominator = denominator * fracCopy.denominator;
-        numerator = numerator * fracCopy.denominator - fracCopy.numerator;
+        reduce();
+    }
+
+    public void add(fraction frac, fraction times) {
+        fraction fracCopy = frac.copy();
+        fracCopy.multiply(times);
+        denominator = denominator * fracCopy.denominator;
+        numerator = numerator * fracCopy.denominator + fracCopy.numerator;
+        reduce();
+    }
+
+    public void add(fraction frac) {
+        fraction fracCopy = frac.copy();
+        denominator = denominator * fracCopy.denominator;
+        numerator = numerator * fracCopy.denominator + fracCopy.numerator;
         reduce();
     }
 
@@ -38,7 +53,13 @@ public class fraction {
     }
 
     public fraction inverted() {
+        if(numerator == 0) return new fraction(0);
         return new fraction(denominator, numerator);
+    }
+
+    public double value() {
+        if(denominator == 0) return 0;
+        return numerator/denominator;
     }
 
     private void reduce() {

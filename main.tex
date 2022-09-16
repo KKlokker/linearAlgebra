@@ -150,6 +150,7 @@
 			A matrix is a rectangular array of numbers called entries.\\
 			The size of a matrix is written as rows x columns\\
 			A single row matrix is alled a row vector and single column is called column vector.\\
+			Standard basis  is the set of column vectors in a identity matrix.\\
 			Variables in matrices are called scalars and unless stated is in the realm of real numbers.\\
 			When refering to a number in the matrix A it will be $a_{row\;column}$ and the value can be found by $(A)_{row\;column}$\\
 			A matrix scalar matrix can be written as $A=[a_{ij}]_{m\times n}$ the $m\times n$ is optional if the size matters.\\
@@ -201,7 +202,101 @@
 				\item $(cA)^T=cA^T$
 				\item $(AB)^T=B^TA^T$
 			\end{itemize}
-				
+		\subsection{Determinants by cofactor expansion}
+			Minor of entry $a_{ij}$ is denoted $M_{ij}$ and is defined as the determinant of the submatrix that remains when i row and j column is deleted.\\
+			The cofactor $C_{ij}$ of $M_{ij}$ is defined as, if $i+j$ is even then $1^{i+j}M_{ij}$ and $(-1)^{i+j}M_{ij}$ if odd\\
+			The determinant of an $n\times n$ matrix can be found either by a row or column in the following way:
+			$$det(A)=a_{1j}C_{1j}+a_{2j}C_{2j}+...+a_{nj}C_{nj}$$
+			This is via the column and by switching $i$ and $j$ it is by the row.\\
+			Therefore making the definition recursive.\\
+			If we make the function $f(i,j)=1 - ((i+j) \% 2 ) \cdot 2$ such it will be $-1$ when the sum of $i$ and $j$ is odd and $1$ when the sum is even.
+			$$det(A)=a_{1j}f(1,j)^{1+j}M_{1j}+a_{2j}f(2,j)^{2+j}M_{2j}+...+a_{nj}f(n,j)^{n+j}M_{nj}$$
+			if we also denote the function $g(A,i,j)$ to be a function which removes row $i$ and $j$\\
+			Then we can make a true recursive definition.\\
+			$$det(A)=a_{1j}f(1,j)^{1+j}det(g(A,1,j)+a_{2j}f(2,j)^{2+j}det(g(A,2,j)+...+a_{nj}f(n,j)^{n+j}det(g(A,n,j)$$
+			Where for the 1x1 matrix $det([a_{11}])=a_{11}$
+			If $A$ is triangular then $det(A)$ is equal to the product of the main diagonal.\\[4mm]
+			It can also be noted that determination of the zero matrix is zero\\
+			And for the transpose $det(A)=det(A^T)$\\[4mm]
+			To make life easier row operation can be done such less operations are needed to find the determinant.\\
+			When performning row operation the following is the for the $A$ matrix with size $n\times n$
+			\begin{itemize}
+				\item If $B$ is the result of a row or column in $A$ being multipled by a constant $k$ then $det(B)=k\cdot det(A)$
+				\item if $B$ is the result of two rows or two columns being interchanged then $det(B)=-det(A)$
+				\item if $B$ is the result of one row being multiplied and added to another row then $det(B)=det(A)$
+			\end{itemize}
+			For the special case where $A=I_n$ and $E$ is the result of an row operation on $A$ the follwing applies
+			\begin{itemize}
+				\item If $E$ is the result of multiplying a row with the constant $k$ which is not 0 then $det(E)=k$
+				\item If $E$ is the result of interchaning two rows then $det(E)=-1$
+				\item If $E$ is the result of adding a constant to a row and adding to another then $det(E)=1$
+			\end{itemize}
+			If $A$ has a row/column which is proportional to another then $det(A)=0$\\
+			Reducing a matrix the echeloen, in doing so instead of reducing the a row by 1/ the leading value, the leading value is taken to the side, then the product of every value taken to the side will be equal to the determinant.\\
+		\subsection{Properties of determinants}
+			If $A$ is a $n\times n$ matrix and $C_{ij}$ is the cofactor of $A_{ij}$, then the matrix is called matrix of cofactors from $A$\\
+			The transpose of the matrix of cofactors from $A$ is called adjoint of $A$
+			\begin{itemize}
+				\item $det(kA)=k^ndet(A)$
+				\item $det(C)=det(A)+det(B)$  If A and B only differ in one row/column and C is equal to A and the the differ row/column sum
+				\item $det(AB)=det(A)det(B)$ if both $A$ and $B$ are $n\times n$ matrices
+				\item $A$ is only invertible if $det(A)\neq 0$
+				\item If $A$ is invertible then $det(A^{-1})=\frac{1}{det(A)}$
+				\item If $A$ is invertible then $A^{-1}=\frac{1}{det(A)}adj(A)$
+			\end{itemize}
+			In the system of linear equation $Ax=b$ then the solutions can be found by
+			$$x_n=\frac{det(A_n)}{det(A)}$$
+		\subsection{Matrix transformation}
+			The matrix transformation is function $T_A(x)=A\cdot x$, which transforms the axis linearly, such origo stays in the same place.\\
+			The function then takes a vector of length $n$ and multiply it / transforms it with a matrix of size $n\times n$\\
+			The transformation which has the follwing proberties:
+			\begin{itemize}
+				\item $T_A(0)=0$ Origin stays in place
+				\item $T_A(k\cdot x) = k\cdot T_A(x)$ 
+				\item $T_A(x+y)=T_A(x)+T_A(y)$
+				\item $T_A(x-y)=T_A(x)-T_A(y)$
+			\end{itemize}
+			To think of the matrix $A$ which the transformation use, it can be though of in the coordination system x,y,z $A$ would then be a 3x3 matrix.\\
+			Each column then represent the standard basis for the axis. \\
+			Such for the Cartesian (standard) coordination system, the matrix would be a 3x3 identity matrix.\\
+			Generally speaking the identity matrix is also called to standard matrix\\[4mm]
+			The transformation may also be composited together like $(T_B\cdot T_A)(x)=T_B(T_A(X))$\\
+			Likewise multiplication the transformation is not commutative $T_A\cdot T_B\neq T_B \cdot T_A$\\
+			The exception to this is rotation and reflection transformations.\\
+			If $A$ is invertible then $T_A:R^n\rightarrow R^n$ $R^n$ is also invertible.\\
+			This is written as $T_A^{-1}=T_{A^{-1}}$\\
+			A linear transformation is when $T:\mathbb{R}^N\rightarrow\mathbb{R}^M$ statisfies the follwing linear conditions
+			\begin{itemize}
+				\item $T(k\cdot x) = k\cdot T(x)$
+				\item $T(x+y)=T(x)+T(y)$
+			\end{itemize}
+		\subsection{Projections}
+			A projection is a transformation to a lower dimension system.\\
+			An orthogonal projections is a projection on a line, plane or the appropriate amount of dimensions.\\
+	\section{Vector spaces}
+		If $V$ defines all objects which are non empty then
+		\begin{itemize}
+			\item $u,v\in V\rightarrow v+u\in V$
+			\item $u+v=v+u$
+			\item $u+(v+w)=(u+v)+w$
+			\item The zero vector exist called $0$ with the property $v+0=v$
+			\item For each $u$ in $V$ exists a $-u$ such $u+(-u)=0$
+			\item If $k$ is a scalar and $u$ is in $V$ then $uk$ is in $V$
+			\item  $k(u+v)=ku+kv$
+			\item $k(mu)=(km)u$
+			\item $1u=u$
+		\end{itemize}
+		If an object satisfies all these axioms then we can classify a set of objects as being in the  vector space.\\
+		Therefore $\mathbb{R}$ is in the vector space, $\mathbb{R}^n$ being the vector of real number length $n$ is in the vector space.\\
+		Likewise $\mathbb{R}^{n\cdot m}$ matrix is in the vector space and even functions like the polynomial functions are in the vector space.\\
+		\subsection{Subspaces}
+			A subspace $W$ of $V$ is a subspace if $u$ and $v$ are in $W$ and $u+v$ is in $W$.\\
+			And if $k$ is a scalar and $u$ is in $W$ then $ku$ is in $W$\\ 
+			
+			
+			
+			
+			
 				
 \end{document}
 
