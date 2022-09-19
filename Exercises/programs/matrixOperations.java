@@ -1,21 +1,21 @@
 public class matrixOperations {
     public static void main(String[] args) {
         fraction[][] matrix1 = intToFracMatrix(new int[][] {
-            {1,0,-1},
-            {1,-2,1},
-            {2,0,1}
+            {1,2,1},
+            {1,3,0}
         });
         fraction[][] matrix2 = intToFracMatrix(new int[][] {
-            {0,0,-2,0,7,12},
-            {2,4,-10,6,12,28},
-            {2,4,-5,6,-5,-1}
+            {1,2,0},
+            {1,3,1}
         });
-
         fraction[][] identity = identity(3,3);
         fraction[][] copy = copy(matrix1);
         eliminate(copy, 0, identity);
+        eliminate(matrix2, 0, identity);
         System.out.println("------Double echeleon--------");
         printMatrixDouble(copy);
+        System.out.println("------Double echeleon--------");
+        printMatrixDouble(matrix2);
         System.out.println("-------Inverse-------");
         printMatrixDouble(identity);
         System.out.println("------original--------");

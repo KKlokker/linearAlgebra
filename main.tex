@@ -292,7 +292,64 @@
 		\subsection{Subspaces}
 			A subspace $W$ of $V$ is a subspace if $u$ and $v$ are in $W$ and $u+v$ is in $W$.\\
 			And if $k$ is a scalar and $u$ is in $W$ then $ku$ is in $W$\\ 
+		\subsection{Spanning sets}
+			$w$ is said to be a linear combination if 
+			$$w=k_1v_1+k_2v_2+...+k_rv_r$$
+			Where $k$ is coefficients and $v$ is vectors in the vector space $V$.\\
+			To say that the linear combination is spanning means by the given vectors a linear combination can be made such every vector is made in the space.\\
+			To find if a vector can be expressed as a combination of two vectors, the two vectors is added with an unknown scalar at each vector in the addition.\\
+			The expression can then be split up such for the vector of size $n$ there will be $n$ equation with $q$ unknowns equal to the amount of addition.\\
+			\begin{align*}
+				(9,2,7)&=k_1(1,2,-1)+k_2(6,4,2)\\
+				&=(k_1+6k_2,2k_1+4k_2,-k_1+2k_2)\\[3mm]
+				9&=k_1+6k_2\\
+				2&=2k_1+4k_2\\
+				77&=-k_1+2k_2\\[3mm]
+				k_1&=-3\\
+				k_2&=2
+			\end{align*}\\
+			This method can be more generalised by setting it up in a matrix form and instead of finding a single vector it can just be a general vector of variables, from which Gauss-Jordan elimination can be used to find if the solution is consistent.
+			To test if a set of vectors span an entire space, they can be setup as a matrix and if the determinant is non zero then it spans the entire space.
+		\subsection{Linearly independent}
+			A set of vectors is set to be linearly idependent set if no vector in the set can be expressed as linear combination of other vectors in the set.\\
+			A set is linearly independent if the only solution is $k_1=0,k_2=0,..k_r=0$
+			$$k_1v_1+k_2v_2+...k_r+v_r=0$$
+			Where $v$ is the vectors in the vector set.\\
+			This is again tested in a matrix form using elimination.\\
+			A set if non inifinite vectors that contains 0 is linearly dependent. - This can be seen by the zero coefficient test will result in 0 using any coefficient.\\
+			A set with exactly two vectors which is not a scalar multiple of each other are linearly independent.\\
+			If a set contains more vectors than the size of the vectors then the set is linearly dependent.\\[4mm]
+			To test if a set of functions $f_1,f_2,...f_n$ are linearly dependent they must be continuous derivable to $n-1$.\\
+			They can then be setup in a matrix of size $n\times n$ where the first row is the functions, the next is the function derived once, this continuous til $n-1$.\\
+			If the determinant is not 0 on $(-\infty,\infty)$ then the fuctions form a linearly independent set of vectors.
+		\subsection{Coordinates and basis}
+			Coordinate system are defiend by the basic vectors, in a rectungular 2D system they are (0,1) and (1,0).\\
+			They both describe the positive direction and the unit spacing between integers.\\
+			A vector space $V$ is set to be finite-dimensional if there exist a finite set of vectors in $V$ which spans $V$.\\
+			An infinite-demensional set has no such set which spans $V$.\\
+			If $S$ is a set of vectors in a finite-dimensional vector space $V$ then $S$ is a basis for $V$ if:
+			\begin{itemize}
+				\item $S$ spans $V$
+				\item $S$ is linearly independent
+			\end{itemize}
+			The basis for a vector space $V$ there will be a unique combination for every vector in $V$.\\
+			In the ordered basis $S$ the coefficients in the linear combination is called the coordinates of $v$ relative to the basis $S$\\
+			The vector made from the combination is called the coordinate vector of $v$ relative to $S$ and is denoted by $(v)_S=(c_1,c_2,...,c_n)$ called comma-delimted form and may be expressed in a column matrix called matrix form\\
+		\subsection{Dimensions}
+			For the vector space with $n$ dimensions:\\
+			If a set in $V$ has fewer than $n$ vector then it does nat span $V$ - due to some dimension not being represented\\
+			If a set in $V$ has more then $n$ vectors then it not linearly dependent \\
+			$dim(V)$ is a function which gives the number of dimensions of $V$.\\
+		\subsection{Change of basis}
+			When changing coordinate system a vector $V$ will be changed in to $(v)_s$ is then is displayed in matrix form.\\
+			Therefore the before coordinate is changed in the coefficients used to create the vector.\\
+			Changing the basis can be described as a transformation matrix, which transform the old basis vectors into the new basis vectors.\\
+			It is denoted by $P_{B\rightarrow B'}=[[u_1']_B|[u_2']_B|...|[u_n']_B]$ where $B$ is the old basis and $B'$ is the new basis\\
+			It can here be observed that $P_{B\rightarrow B'}\cdot P_{B'\rightarrow B}=I$\\
+			To find the transition matrix, a matrix can be made of [new basis|old basis] where the basis's are column vectors of the basis vectors.\\
+			Then the matrix is reduced to echeloen form which results in [I|transistion matrix from old to new]
 			
+			 
 			
 			
 			

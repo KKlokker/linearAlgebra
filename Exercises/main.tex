@@ -95,7 +95,7 @@
 	\clearpage
 	\tableofcontents
 	\clearpage
-	\section{Week 46}
+	\section{Week 36}
 		\subsection{Which equation are linear in $x_1$, $x_2$ and $x_3$}
 			\subsubsection{$x_1+5x_2-\sqrt{2}x^3=1$}
 				This is a linear equation
@@ -140,7 +140,174 @@
 				0 & 0 & 1  & 5
 			\end{bmatrix}$\\
 			Echelon form
-	\section{Week 47}
-		\subsection{
-			
+	\section{Week 38}
+		\subsection{Show that the determinant og the matix is 0}
+			$\begin{bmatrix}
+				-2 & 8 & 1 & 4 \\
+				3 & 2 & 5 & 1\\
+				1 & 10 & 6  & 5\\
+				4 & -6 & 4  & -3
+			\end{bmatrix}$\\[3mm]
+			Column 2 and 4 are proportional to eachother therefore making the det=0
+		\subsection{Is the following matrix invertible}
+			$\begin{bmatrix}
+				2 & 0 & 3 \\
+				0 & 3 & 2 \\
+				-2 & 0 & -4
+			\end{bmatrix}$\\[3mm]
+			The determinant is -6 and therefore not zero and therefore invertible
+		\subsection{Find the standard matrix for the transformation defined by the equations}
+			\begin{align*}
+				w_1=7x_1+2x_2-8x_3\\
+				w_2=-x_2+5x_3\\
+				w_3=4x_1+7x_2-x_3
+			\end{align*}
+			$\begin{bmatrix}
+				7 & 2 & -8 \\
+				0 & -1 & 5 \\
+				4 & 7 & -1
+			\end{bmatrix}$\\[3mm]
+		\subsection{Is a linear function a transformation of $R$}
+			Yes the linear function can be a transform of the space $R$
+		\subsection{The images of the standard basis vectors for $R^3$ are given for a linear trasnformation $T:R^3\rightarrow R^3$. Find the standard matrix for the transformation and find $T(x)$}
+			\begin{align*}
+					T(e_1)=
+				\begin{bmatrix}
+					1 \\
+					3 \\
+					0
+				\end{bmatrix}\\[3mm]
+					T(e_2)=
+				\begin{bmatrix}
+					0 \\
+					0 \\
+					1
+				\end{bmatrix}\\[3mm]
+					T(e_3)=
+				\begin{bmatrix}
+					4 \\
+					-3 \\
+					-1
+				\end{bmatrix}\\[3mm]
+					x=
+				\begin{bmatrix}
+					2 \\
+					1 \\
+					0
+				\end{bmatrix}\\[3mm]
+					A=
+				\begin{bmatrix}
+					1 & 0 & 4 \\
+					3 & 0 & -3\\
+					0 & 1 & -1
+				\end{bmatrix}\\[3mm]
+					T(x)=
+				\begin{bmatrix}
+					2 \\
+					6 \\
+					1
+				\end{bmatrix}\\[3mm]
+			\end{align*}
+		\subsection{Find the standard matrix $A$ for the linear transformation $T:R^2\rightarrow R^2$ for which}
+			$$T(\begin{bmatrix}
+					1 \\
+					1
+				\end{bmatrix})=\begin{bmatrix}
+					1 \\
+					-2
+				\end{bmatrix},T(\begin{bmatrix}
+					2 \\
+					3
+				\end{bmatrix})=\begin{bmatrix}
+					-2 \\
+					5
+				\end{bmatrix}$$
+				
+				
+			\begin{align*}
+				\begin{bmatrix}
+					1 \\
+					0
+				\end{bmatrix}=c_1\begin{bmatrix}
+					1 \\
+					1
+				\end{bmatrix}+c_2\begin{bmatrix}
+					2 \\
+					3
+				\end{bmatrix}\\
+				\begin{bmatrix}
+					0 \\
+					1
+				\end{bmatrix}=k_1\begin{bmatrix}
+					1 \\
+					1
+				\end{bmatrix}+k_2\begin{bmatrix}
+					2 \\
+					3
+				\end{bmatrix}\\
+				\text{c variable found by}\\
+				\begin{bmatrix}
+					1 & 2 & 1 \\
+					1 & 3 & 0
+				\end{bmatrix}\\
+				\text{k variable found by}\\
+				\begin{bmatrix}
+					1 & 2 & 0 \\
+					1 & 3 & 1
+				\end{bmatrix}\\
+				\text{Gauss jordian magic!}\\
+				c_1=3, c_2=-1, k_1=-2,k_2=1\\
+				T(
+				\begin{bmatrix}
+					1 \\
+					0
+				\end{bmatrix})=3T(
+				\begin{bmatrix}
+					1 \\
+					1
+				\end{bmatrix})+(-1)T(
+				\begin{bmatrix}
+					2 \\
+					3
+				\end{bmatrix})\\
+				=\begin{bmatrix}
+					3 \\
+					-6
+				\end{bmatrix}-
+				\begin{bmatrix}
+					-2 \\
+					5
+				\end{bmatrix}=\begin{bmatrix}
+					5 \\
+					-11
+				\end{bmatrix}\\
+				T(
+				\begin{bmatrix}
+					0 \\
+					1
+				\end{bmatrix})=-2T(
+				\begin{bmatrix}
+					1 \\
+					1
+				\end{bmatrix})+1T(
+				\begin{bmatrix}
+					2 \\
+					3
+				\end{bmatrix})\\
+				=\begin{bmatrix}
+					-2 \\
+					4
+				\end{bmatrix}+
+				\begin{bmatrix}
+					-2 \\
+					5
+				\end{bmatrix}=\begin{bmatrix}
+					-4 \\
+					9
+				\end{bmatrix}\\[4mm]
+				A=\begin{bmatrix}
+				5&-4\\
+				-11 & 9
+					\end{bmatrix}
+			\end{align*}
 \end{document}
