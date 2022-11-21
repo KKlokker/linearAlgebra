@@ -1,0 +1,408 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{tikz-network}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\title{Linear algebra\\Exam assignment}
+\date{2022}
+\author{Kristoffer Klokker\\krklo21}
+\setcounter{tocdepth}{1}
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{HTML}{C42043}
+\definecolor{backcolour}{HTML}{F2F2F2}
+\definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+\color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\numberstyle,
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=3,
+}
+\lstset{style=mystyle}
+\usepackage{zref-base}
+
+\makeatletter
+\newcounter{mylstlisting}
+\newcounter{mylstlines}
+\lst@AddToHook{PreSet}{%
+  \stepcounter{mylstlisting}%
+  \ifnum\mylstlines=1\relax
+    \lstset{numbers=none}
+  \else
+    \lstset{numbers=left}
+  \fi
+  \setcounter{mylstlines}{0}%
+}
+\lst@AddToHook{EveryPar}{%
+  \stepcounter{mylstlines}%
+}
+\lst@AddToHook{ExitVars}{%
+  \begingroup
+    \zref@wrapper@immediate{%
+      \zref@setcurrent{default}{\the\value{mylstlines}}%
+      \zref@labelbyprops{mylstlines\the\value{mylstlisting}}{default}%
+    }%
+  \endgroup
+}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+% \mylstlines print number of lines inside listing caption
+\newcommand*{\mylstlines}{%
+  \zref@extractdefault{mylstlines\the\value{mylstlisting}}{default}{0}%
+}
+\makeatother
+
+
+\newcommand\numberstyle[1]{%
+    \footnotesize
+    \color{codegray}%
+    \ttfamily
+    \ifnum#1<10 0\fi#1 |%
+}
+
+
+\begin{document}
+	\maketitle
+	\clearpage
+	\tableofcontents
+	\clearpage
+	\section{Problem}
+		Consider the linear system (in the variables $x_1,x_2,x_3$ and $x_4$) of equations.
+		\begin{align*}3x_1+3x_2-6x_4&=3\\
+		x_3+x_4&=2\\
+		2x_1+2x_2-3x_4&=2\end{align*}
+		\subsection{write up the augmented matrix of the system}
+			$$\left(
+			    \begin{array}{cccc|c}
+			    3&3&0&-6&3\\ 
+			    0&0&1&1&2\\
+			    2&2&0&-3&2
+			    \end{array}
+			\right)$$
+			To write the system of equation into an augmented form, the coefficients are inserted in order. The results of the equations are then inserted as the last column.
+		\subsection{Bring the augmented matrix from the previous question into reduced row echelon form.}
+			\begin{align}
+				\left(
+				    \begin{array}{cccc|c}
+				    3&3&0&-6&3\\ 
+				    0&0&1&1&2\\
+				    2&2&0&-3&2
+				    \end{array}
+				\right)\xrightarrow{R_1=\frac{1}{3}R1}&
+				\left(
+				    \begin{array}{cccc|c}
+				    1&1&0&-2&1\\ 
+				    0&0&1&1&2\\
+				    2&2&0&-3&2
+				    \end{array}
+				\right)\\
+				\xrightarrow{R_3=R_3-2R_1}&\left(
+				    \begin{array}{cccc|c}
+				    1&1&0&-2&1\\ 
+				    0&0&1&1&2\\
+				    0&0&0&-7&0
+				    \end{array}
+				\right)\\
+				\xrightarrow{R_3=\frac{1}{-7}R3}&\left(
+				    \begin{array}{cccc|c}
+				    1&1&0&-2&1\\ 
+				    0&0&1&1&2\\
+				    0&0&0&1&0
+				    \end{array}
+				\right)\\
+				\xrightarrow{R_2=R_2-R_3}&\left(
+				    \begin{array}{cccc|c}
+				    1&1&0&-2&1\\ 
+				    0&0&1&0&2\\
+				    0&0&0&1&0
+				    \end{array}
+				\right)\\
+				\xrightarrow{R_1=R_1-(-2)R_3}&\left(
+				    \begin{array}{cccc|c}
+				    1&1&0&0&1\\ 
+				    0&0&1&0&2\\
+				    0&0&0&1&0
+				    \end{array}
+				\right)
+			\end{align}
+			For performing the reduction the following was done:
+			\begin{itemize}
+				\item First row 1 is divided by 3 to make the leading number 1.\\
+				\item Then row 3 is subtracted by row 1 times 2\\
+				\item Since row 2 already has a leading 1, row 3 is divided by -7 to create a leading 1.\\
+				\item Row 2 is subtracted with row 3 and row 1 is subtracted with row 3 times 2.
+			\end{itemize}	    
+		\subsection{Solve the system and present the full solution in parametric form.}
+			\begin{align}
+				\left(
+				    \begin{array}{cccc|c}
+				    1&1&0&0&1\\ 
+				    0&0&1&0&2\\
+				    0&0&0&1&0
+				    \end{array}
+				\right)\\
+				x_1+x_2=1\\
+				x_3=2\\
+				x_4=0\\
+				\left\{
+				\begin{array}{cccc}
+					x_1&=&1&-x_2\\
+					x_3&=&2&\\
+					x_4&=&0&
+				\end{array}	
+				\right.		
+			\end{align}
+			To get the solution the reduced matrix could be used. From this the equations could be gotten. It was then formatted in a parametric form, where $x_2$ is the free variable.
+	\clearpage
+	\section{Problem}
+		Consider the $3\times 3$-matrix $A=\begin{bmatrix}2&0&3\\0&1&0\\1&1&2\end{bmatrix}$
+		\subsection{Compute the determinant $det(A)$}
+			\begin{align*}
+				det\left(\begin{bmatrix}2&0&3\\0&1&0\\1&1&2\end{bmatrix}\right)&=2det\left(\begin{bmatrix}1&0\\1&2\end{bmatrix}\right)-0det\left(\begin{bmatrix}0&0\\1&2\end{bmatrix}\right)+3det\left(\begin{bmatrix}0&1\\1&1\end{bmatrix}\right)\\
+				&=2(2-0)-0(0-0)+3(0-1)\\
+				&=1
+			\end{align*}
+			The determinant was found to be 1 for the given matrix.
+		\subsection{Determine if $A$ is invertible and find the inverse of $A$ if it exists.}
+			\begin{align*}
+				\left[
+					\begin{array}{ccc|ccc}
+						1&0&0&2&0&3\\
+						0&1&0&0&1&0\\
+						0&0&1&1&1&2
+					\end{array}
+				\right]\\
+				\xrightarrow{R_1=0.5R_1}\left[
+					\begin{array}{ccc|ccc}
+						0.5&0&0&1&0&1.5\\
+						0&1&0&0&1&0\\
+						0&0&1&1&1&2
+					\end{array}
+				\right]\\
+				\xrightarrow{R_3=R_3-R_1}\left[
+					\begin{array}{ccc|ccc}
+						0.5&0&0&1&0&1.5\\
+						0&1&0&0&1&0\\
+						-0.5&0&1&0&1&0.5
+					\end{array}
+				\right]\\
+				\xrightarrow{R_3=R_3-R_2}\left[
+					\begin{array}{ccc|ccc}
+						0.5&0&0&1&0&1.5\\
+						0&1&0&0&1&0\\
+						-0.5&-1&1&0&0&0.5
+					\end{array}
+				\right]\\
+				\xrightarrow{R_3=2R_3}\left[
+					\begin{array}{ccc|ccc}
+						0.5&0&0&1&0&1.5\\
+						0&1&0&0&1&0\\
+						-1&-2&2&0&0&1
+					\end{array}
+				\right]\\
+				\xrightarrow{R_1=R_1-1.5R_3}\left[
+					\begin{array}{ccc|ccc}
+						2&3&-3&1&0&0\\
+						0&1&0&0&1&0\\
+						-1&-2&2&0&0&1
+					\end{array}
+				\right]
+			\end{align*}
+			Since the determinant is not equal to 0, the matrix is inversible. To find the inverse, the identity matrix is added to the side of the matrix. Then the matrix is reduced to reduced echelon form. Then the left matrix will be the inverse. Therefore making the inverse of the matrix $\begin{bmatrix}2&3&-3\\0&1&0\\-1&-2&2\end{bmatrix}$.
+	\section{Problem}
+		Consider the vector space $\mathbb{R}^3$ and the map $T:\mathbb{R}^3\rightarrow \mathbb{R}$ given by
+		$$T((x_1,x_2,x_3))=\frac{1}{3}(x_1+x_2+x_3)$$
+		\subsection{Show that the map $T$ is linear}
+			\begin{align*}
+				f(x+y)=f(x)+f(y)\\
+				f((x_1+y_1,x_2+y_2,x_3+y_3))=f((x_1,x_2,x_3))+f((y_1,y_2,y_3))\\
+				\frac{1}{3}(x_1+y_1+x_2+y_2+x_3+y_3)=\frac{1}{3}(x_1+x_2+x_3)+\frac{1}{3}(y_1+y_2+y_3)\\
+				\frac{1}{3}(x_1+y_1+x_2+y_2+x_3+y_3)=\frac{1}{3}z(x_1+y_1+x_2+y_2+x_3+y_3)\\[4mm]
+				f(kx)=kf(x)\\
+				f((kx_1,kx_2,kx_3))=kf((x_1,x_2,x_3))\\
+				\frac{1}{3}(kx_1+kx_2+kx_3)=\frac{1}{3}k(x_1+x_2+x_3)\\
+				\frac{1}{3}(kx_1+kx_2+kx_3)=\frac{1}{3}(kx_1+kx_2+kx_3)
+			\end{align*}
+			The definition of a linear map is $f(x+y)=f(x)+f(y)$ and $f(kx)=kf(x)$. It can be seen that both requirements holds true. Therefore the map is linear.
+		\subsection{Show that the map $T$ is onto}
+			\begin{align*}
+				T=Ax\\
+				A=\begin{bmatrix}\frac{1}{3}&\frac{1}{3}&\frac{1}{3}\end{bmatrix}\\
+				\begin{bmatrix}1&1&1\end{bmatrix}\\
+			\end{align*}
+			By expressing the transformation as a matrix, can the matrix be reduced to reduced row echelon form. It can then be seen that the reduced row echelon form matrix has 1 pivot column, the first column. Therefore the transformation is onto since the number of pivot columns matches dimensions of the codomain.
+		\subsection{Show that the vector $(-1,\frac{1}{2},\frac{1}{2})$ belongs to the kernel of $T$}
+			\begin{align*}
+				T((-1,\frac{1}{2},\frac{1}{2})&=\frac{1}{3}(-1+\frac{1}{2}+\frac{1}{2})\\
+				&=\frac{1}{3}(0)\\
+				&=0
+			\end{align*}
+			Inserting the vector into the transformation shows that it results in 0, and therefore the vector is part of the kernel.
+		\subsection{Determine the rank and nullity of $T$}
+			It was found that the reduced row echelon form had 1 pivot column in 3.2, therefore the reduced row echelon form also have 2 free columns, which makes to nullity equal to 2.\\
+			For the rank it was found in 3.2 that the transformation was onto. Therefore the range $dim(range(T))=dim(codomain)$ and the rank must therefore be equal to $1$.\\
+			This is also proven in to rank-nullity theorem which states $dim(domain)=rank+nullity$, which for the transformation gives $3=1+2$.
+	\clearpage
+	\section{Problem}
+		\subsection{Show that the set $B'=\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},\begin{bmatrix}2\\1\\0\end{bmatrix},\begin{bmatrix}1\\1\\1\end{bmatrix}\right\}$ is a basis for $\mathbb{R}^3$}
+			\begin{align*}
+				det\left(\begin{bmatrix}1&2&1\\0&1&1\\0&0&1\end{bmatrix}\right)=1
+			\end{align*}
+			Since the determinant is not 0, making the vectors linear independent. It can also be seen that the matrix is row echelon form, and have 3 pivot columns, therefore it spans $\mathbb{R^3}$ and is a basis.
+		\subsection{Denote by $B$ the standard basis $B=\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},\begin{bmatrix}0\\1\\0\end{bmatrix},\begin{bmatrix}0\\0\\1\end{bmatrix}\right\}$ and determine the transition matrix $P_{B\rightarrow B'}$ from $B$ to $B'$}
+			\begin{align}
+				\left[\begin{array}{ccc|ccc}1&2&1&1&0&0\\0&1&1&0&1&0\\0&0&1&0&0&1\end{array}\right]\\
+				\left[\begin{array}{ccc|ccc}1&0&0&1&-2&1\\0&1&0&0&1&-1\\0&0&1&0&0&1\end{array}\right]\\
+				P_{B\rightarrow B'}=\begin{bmatrix}1&-2&1\\0&1&-1\\0&0&1\end{bmatrix}
+			\end{align}
+			A new matrix is constructed in the form $[new | old]$ (11). This matrix can then be reduced to reduced echelon form (12). The right side of the matrix will then be the transformation matrix (13).
+		\subsection{Consider the linear map $T:\mathbb{R}^3\rightarrow \mathbb{R}^3$ given by $$T(x_1,x_2,x_3)=(2x_1-x_2,x_2+x_3,x_1)$$ Determine the matrix $[T]_B$ with respect to the standard basis}
+			\begin{align}
+				T\left(\begin{bmatrix}1\\0\\0\end{bmatrix}\right)=\begin{bmatrix}2\\0\\1\end{bmatrix}\\
+				T\left(\begin{bmatrix}0\\1\\0\end{bmatrix}\right)=\begin{bmatrix}-1\\1\\0\end{bmatrix}\\
+				T\left(\begin{bmatrix}0\\0\\1\end{bmatrix}\right)=\begin{bmatrix}0\\1\\0\end{bmatrix}\\
+				[T]_B=\begin{bmatrix}2&-1&0\\0&1&1\\1&0&0\end{bmatrix}
+			\end{align}
+			To find the matrix, the vectors of the standard basis is transformed (14), (15), (16). Then the transformed vectors are gathered in matrix and will be the $[T]_B$
+		\subsection{Determine the matrix $[T]_{B'}$ with respect to the basis $B'$}
+			\begin{align}
+			 [T]_{B'}&=P_{B\rightarrow B'}[T]_BP_{B'\rightarrow B}\\
+			 P_{B'\rightarrow B}&=P_{B\rightarrow B'}^{-1}\\
+			 P_{B'\rightarrow B}&=\begin{bmatrix}1&2&1\\0&1&1\\0&0&1\end{bmatrix}\\
+			 [T]_{B'}&=\begin{bmatrix}1&-2&1\\0&1&-1\\0&0&1\end{bmatrix}\begin{bmatrix}2&-1&0\\0&1&1\\1&0&0\end{bmatrix}\begin{bmatrix}1&2&1\\0&1&1\\0&0&1\end{bmatrix}\\
+			 [T]_{B'}&=\begin{bmatrix}3&3&-2\\-1&-1&-1\\1&2&1\end{bmatrix}
+			\end{align}
+			To find $[T]_{B'}$ ARK Theorem 8.5.2 can be used which states (18). The transition matrix $P_{B\rightarrow B'}$ was found in 4.2 and to find $P_{B'\rightarrow B}$ the inverse was taken (19) (20). Then the matrices was inserted (21) and the $[T]_{B'}$ was found (22).
+	\section{Problem}
+		Consider the matrix $A=\begin{bmatrix}2&-1\\3&-2\end{bmatrix}\in \mathbb{M}_2(\mathbb{R})$
+		\subsection{Determine the eigenvalues for $A$}
+			\begin{align}
+				det\left(\begin{bmatrix}\lambda & 0\\0&\lambda\end{bmatrix}-\begin{bmatrix}2&-1\\3&-2\end{bmatrix}\right)=0\\
+				det\left(\begin{bmatrix}\lambda-2 & 1\\-3&\lambda+2\end{bmatrix}\right)=0\\
+				(\lambda-2)(\lambda+2)-(1\cdot (-3))=0\\
+				\lambda^2-1=0\\
+				\lambda=\left\{\begin{array}{c}1\\-1\end{array}\right.
+			\end{align}
+			To find the eigenvalues, the equation (23) can be setup due to the determinant has to be equal to 0. From this $\lambda$ can be isolated and found to be equal to $\pm 1$.
+		\subsection{Determine a basis for each of the eigenspaces}
+			\begin{align}
+				\begin{bmatrix}\lambda-2 & 1\\-3&\lambda+2\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=\begin{bmatrix}0\\0\end{bmatrix}\\
+				\lambda = 1\\
+				\begin{bmatrix}-1 & 1\\-3&3\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=\begin{bmatrix}0\\0\end{bmatrix}\\
+				x_1=1\\
+				x_2=1\\
+				\begin{bmatrix}1\\1\end{bmatrix}\\[4mm]
+				\lambda=-1\\
+				\begin{bmatrix}-3 & 1\\-3&1\end{bmatrix}\begin{bmatrix}x_1\\x_2\end{bmatrix}=\begin{bmatrix}0\\0\end{bmatrix}\\
+				\begin{bmatrix}-3&1&0\\-3&1&0\end{bmatrix}\\
+				x_1=1\\
+				x_2=3\\
+				\begin{bmatrix}1\\3\end{bmatrix}
+			\end{align}
+			To find the basis for the eigenspaces, the equation could be used (28). From this the $\lambda$ values could be inserted. This then created two equation with two unknows which could be solved. From this the eigenspace for $\lambda=1$ was found (33) and for $\lambda=-1$ (39).
+		\subsection{Find an invertible matrix $P\in \mathbb{B}_2(\mathbb{R})$ such that $P^{-1}AP$ is diagonal}
+			\begin{align*}
+				P=\begin{bmatrix}1&1\\1&3\end{bmatrix}\\
+				P^{-1}=\begin{bmatrix}1.5&-0.5\\-0.5&0.5\end{bmatrix}\\
+				P^{-1}AP=\begin{bmatrix}1&0\\0&-1\end{bmatrix}
+			\end{align*}
+			The matrix $P$ could be found by using the eigenspaces in a matrix. This could then be inverted to find $P^{-1}$. From this the diagonal could be found through $P^{-1}AP$. The diagonal was then found to be $\begin{bmatrix}1&0\\0&-1\end{bmatrix}$.
+		\subsection{Determine the $2022^{nd}$ power of $A$}
+			\begin{align*}
+				\begin{bmatrix}1&0\\0&-1\end{bmatrix}^{2022}=\begin{bmatrix}1&0\\0&1\end{bmatrix}\\
+				A^{2022}=P\begin{bmatrix}1&0\\0&1\end{bmatrix}P^{-1}\\
+				A^{2022}=\begin{bmatrix}1&1\\1&3\end{bmatrix}\begin{bmatrix}1&0\\0&1\end{bmatrix}\begin{bmatrix}1.5&-0.5\\-0.5&0.5\end{bmatrix}\\
+				A^{2022}=\begin{bmatrix}1&0\\0&1\end{bmatrix}
+			\end{align*}
+			To calculate $A^{2022}$ the diagonal can be raised to the same power. Then using the $P$ and $P^{-1}$ the diagonal could be converted back into $A^{2022}$.
+	\clearpage
+	\section{Problem}
+		Consider the vector space $\mathcal{P}_2=\{a_0+a_1x+a_2x^2|a_0,a_1,a_2\in \mathbb{R}\}$ consisting of polynomials of degree at most 2 with the inner product
+		$$<a_0+a_1x+a_2x^2,b_0+b_1x+b_2x^2>=a_0b_0+\frac{1}{2}a_1b_1+\frac{1}{4}a_2b_2$$
+		Denoted by $p_1,p_2,p_3 \in \mathcal{P}_2$ the polynomials given by
+		$$p_1(x)=1,\quad p_2(x)=x-\sqrt{2}x^2\quad \text{and}\quad p_3(x)=x+\sqrt{2}x^2$$
+		\subsection{Verify that $B=\{p_1,p_2,p_3\}$ is an orthonormal basis for $\mathcal{P}_2$ for the inner product defined}
+			\begin{align*}
+				<p_1,p_2>&=1\cdot 0+\frac{1}{2}0\cdot 1+\frac{1}{4}0\cdot (-\sqrt{2})=0\\
+				<p_1,p_3>&=1\cdot 0+\frac{1}{2}0\cdot 1+\frac{1}{4}0\cdot \sqrt{2}=0\\
+				<p_2,p_3>&=0\cdot 0 +\frac{1}{2}1\cdot 1 + \frac{1}{4}\sqrt{2}\cdot (-\sqrt{2})=0\\
+				||p_1||^2&=<p_1,p_1>\\
+				||p_1||^2&=1\cdot 1+\frac{1}{2}0\cdot 0+\frac{1}{4}0\cdot 0=1\\
+				||p_2||^2&=<p_2,p_2>\\
+				||p_2||^2&=0\cdot 0+\frac{1}{2}1\cdot 1+\frac{1}{4}(-\sqrt{2})\cdot (-\sqrt{2})=1\\
+				||p_3||^2&=<p_3,p_3>\\
+				||p_3||^2&=0\cdot 0+\frac{1}{2}1\cdot 1+\frac{1}{4}\sqrt{2}\cdot \sqrt{2}=1				
+			\end{align*}
+			To verify that $B=\{p_1,p_2,p_3\}$ is an orthonormal basis, first the vectors is tested to be orthogonal. This is done by taking the inner product, and if the result is 0 then the two vectors are orthogonal.\\
+			For it to be an orthonormal basis, the norm of the vectors has to be 1. The inner product with itself can then be used to find the squared norm which all resulted in 1, there making the norm 1.
+		\subsection{Compute the coefficient vector $[2-x+\sqrt{2}x^2]_B$} 
+			\begin{align*}
+				\begin{bmatrix}
+					1&0&0&2\\
+					0&1&1&-1\\
+					0&-\sqrt{2}&\sqrt{2}&\sqrt{2}
+				\end{bmatrix}\\
+				\begin{bmatrix}
+					1&0&0&2\\
+					0&1&0&-1\\
+					0&0&1&0
+				\end{bmatrix}\\
+				\begin{bmatrix}2\\-1\\0\end{bmatrix}
+			\end{align*}
+			By setting up the matrix $[p_1|p_2|p_3|v]$ where $v$ is the wanted vector, the matrix can be reduced to reduced echelon form. From this the coefficient can be found to be $p_1=2$, $p_2=-1$, and $p_3=0$, which the coefficient vector could be constructed from.
+		\subsection{Compute the norm $||p_1+p_2||$}
+			\begin{align*}
+				||p_1+p_2||=\sqrt{<p_1+p_2,p_1+p_2}\\
+				p_1+p_2=1+x-\sqrt{2}x^2\\
+				||p_1+p_2||=\sqrt{<1+x-\sqrt{2}x^2,1+x-\sqrt{2}x^2}\\
+				||p_1+p_2||=\sqrt{1\cdot 1 + \frac{1}{2}1\cdot 1 + \frac{1}{4}(-\sqrt{2})\cdot (-\sqrt{2})}\\
+				||p_1+p_2||=\sqrt{1+ \frac{1}{2} + \frac{1}{2}}\\
+				||p_1+p_2||=\sqrt{2}\\
+			\end{align*}
+			To find the norm for $p_1+p_2$, the inner product can be used. By calculating the sum of the two polynomials the norm can be found. This was then reduced to be equal $\sqrt{2}$.
+	\clearpage
+	\section{Problem}
+		State if the following statements is true or false.
+		\begin{enumerate}
+			\item If $T$ is an invertible, linear map then the inverse $T^{-1}$ is also linear - True
+			\item Every vector space has a unique basis - False
+			\item The map $T:\mathbb{R}^2\rightarrow \mathbb{R}^2$ given by $T(x,y)=(x-y,x^2+y^2)$ is linear - False
+			\item The set $\{(1,1,1,1),(1,1,1,0),(2,2,2,1)\}$ can be extended to a basis for $\mathbb{R}^4$ - False
+			\item In a 4-dimensional vector space, no set consisting of 3 vectors can be spanning - True
+		\end{enumerate}
+\end{document}
+

@@ -297,6 +297,7 @@
 			$$w=k_1v_1+k_2v_2+...+k_rv_r$$
 			Where $k$ is coefficients and $v$ is vectors in the vector space $V$.\\
 			To say that the linear combination is spanning means by the given vectors a linear combination can be made such every vector is made in the space.\\
+			So if $V$ is the vector space and $W\leq V$ a subspace such that $W=span\{w_1,...,w_n\}$ then the set is the spanning set of $W$\\
 			To find if a vector can be expressed as a combination of two vectors, the two vectors is added with an unknown scalar at each vector in the addition.\\
 			The expression can then be split up such for the vector of size $n$ there will be $n$ equation with $q$ unknowns equal to the amount of addition.\\
 			\begin{align*}
@@ -348,12 +349,164 @@
 			It can here be observed that $P_{B\rightarrow B'}\cdot P_{B'\rightarrow B}=I$\\
 			To find the transition matrix, a matrix can be made of [new basis|old basis] where the basis's are column vectors of the basis vectors.\\
 			Then the matrix is reduced to echeloen form which results in [I|transistion matrix from old to new]
+	\section{General Linear Transformation}
+		If $T:V\rightarrow W$ is a mapping between vector spaces then T is a linear transformation if the two proberties hold
+		\begin{itemize}
+			\item $T(ku)=kT(u)$
+			\item $T(u+v)=T(u)+T(v)$
+		\end{itemize}
+		It can here be observed that the following is true
+		\begin{itemize}
+			\item $T(0)=0$
+			\item $T(u-v)=T(u)-T(v)$
+			\item $T(-v)=-T(v)$
+		\end{itemize}
+		The mapping $I:v\rightarrow$ defined by $I(v)=v$ is the identity operator.\\
+		Let $T:V\rightarrow W$ a linear transformation. If $S=\{v_1,v_2,...,v_n\}$ is the basis for $V$ then any vector in $V$ can be described as
+		$$T(V)=c_1T(v_1)+c_2T(v_2)+...+c_nT(v_n)$$
+		Where $c_1,c_2,...c_n$ are the coefficients required to express v as a linear combination of vector basis in $S$\\
+		For the transformation $T:V\rightarrow W$ then the kernel denoted by $ker(T)$ is all vectors in $V$ which maps into $0$\\
+		Given a set of vectors the range denoted $R(T)$ is the possible outcome given the set of vector inputs.\\
+		The rank of a transformation is denoted by $rank(T)$ and is equal to the number of dimension in the transformation\\
+		The Nullity of the transformation is denoted by $nullity(T)$ and is equal to the number of dimensions which is in the kernal.\\
+		It can here be seen in the transformation $T:V\rightarrow W$ that $rank(T)+nullity(T)=dim(V)$\\
+		A transformation is set to be one-to-one if it maps every distinct vector to a new distinct vector. - $ker(T)=\{0\}$\\
+		A transformation $T: V\rightarrow W$ is set to be onto $W$ if every vector in $W$ can be obtained through a mapping of $V$\\
+		$T_A$ is one-to-one only if the columns of $A$ are linearly independent- due to if not linearly independent the nullity would be more then 0\\[4mm]
+		\begin{figure}
+			\includegraphics[width=300px]{assets/equivalentStatementsForInvertibleMatrix.png}
+			\centering
+			\caption{Equivalent statements for the invertible matrix}
+		\end{figure}
+		The inverse transformation is defined by if $T_A:V\rightarrow W$ then $T_{A^{-1}}=W\rightarrow V=T^{-1}$\\
+		The row space is the space defiend by the rows. By reducing the transformation the number of none zero rows are the row space rank.\\
+		The same goes for columns in the column space.\\
+		It can here be observed that the row space and column space will ahve the same rank.
+		\subsection{Matrices for general linear transformations}
+			For the two vector spaces $V$ with basis $B$ and $W$ with basis $B'$. Here vector space $V$ is $n$ dimensions and $W$ is $m$ dimensions.\\ 
+			Our goal is to find a matrix $A$ such a vector $x$ can be transformed from $V$ basis $B$ to $W$ basis $B'$ - $A[x]_B=[T(x)]_{B'}$\\
+			If we have an $A\in\mathbb{M}_{m,n}(\mathbb{R})$ then $T(x)$ can be computed in the following steps
+			\begin{enumerate}
+				\item First compute $[x]_B\in \mathbb{R}^n$
+				\item Then compute $A\cdot [x]_b\in \mathbb{R}^m$
+				\item Reconstruct $T(X)$ from its $B'$ coordinates $[T(x)]_{B'}=A\cdot [x]_B$
+			\end{enumerate}
+			To find $A$ we can do the following
+			\begin{enumerate}
+				\item Write $B=\{u_1,...,u_n\}$ and $B'=\{v_1,...,v_m\}$
+				\item Then $A=[[T(u_1)]_{B'}|...|[T(u_n)]_{B'}]\in\mathbb{M}_{m,n}(\mathbb{R})$
+			\end{enumerate}
+			The matrix $A$ is denoted $[T]_{B',B}$ and the order is choosen such $[T(x)]_{B'}=[T]_{B',B}\cdot [x]_B$\\
+			This is caleld matrix of $T$ relatiove to $B$ and $B'$\\
 			
-			 
+		\subsection{Composition}
+			The transformation of $T_1:U\rightarrow V$ and $T_2:V\rightarrow W$ can be combined to the linear transformation $(T_1\cdot T_2):U\rightarrow W$\\
+			This is called the composition of the two transformations.\\
+			This may again also be chained with other transformations.
+			The composition will be linear and if both transformation is one-to-one then the composition is also one-to-one.\\
+			If both transformations are isomorphisms then the composition and the inverse of the composition are isomorphisms\\
+		\subsection{Isomorphism}
+			A transformation $T:V\rightarrow W$ which is both one-to-one and onto is isomorphism, and $W$ is isomorphic to $V$ written as $W\simeq V$\\
+			Therefore there will exist an inverse transformation such $T^{-1}\cdot T(v)=v$\\
+			Two vector spaces are isomorphic iff they have the same dimension\\
+		\subsection{Similarity}
+			To find a transformation in bassis $B$ in another basis $B'$ then $[T]_{B'}=P^{-1}_{B'\rightarrow B}\cdot [T]_B\cdot P_{B'\rightarrow B}$
+			It can then be said that $[T]_{B'}$ and $T_{B}$ is similar.
+	\section{Eigenvalues and eigenvectors}
+		An eigenvector is vector which only get scaled in a transformation, which is not a zero vector.\\
+		This scaled value is the eigenvalue.\\
+		$$Ax=\lambda x$$
+		Where $x$ is the eigen vector, $A$ is a transformation and $\lambda$ is the eigenvalue.\\
+		For the matrix $A$ it will be invertible only if $\lambda =0$ is not an eigenvalue of $A$.
+		\subsection{Finding eigenvalues}
+			To find an eigenvalue of a transformation, first it can be rewritten as
+			$$Ax=\lambda\cdot I x$$
+			Such it is matrix multiplcation on both sides and it can therefore be reduced
+			$$(\lambda \cdot I-A)x=0$$
+			Then an value for $\lambda$ can be found such the matrix in the parenthese will be linearly dependent.\\
+			When the matrix is linear dependent, this makes it possible for there to exists an eigenvector of which the first equation holds true.\\
+			When expanding $(\lambda\cdot I-A)$ it is known as the characteristic polynomial denoted $p(\lambda)$\\
+			This polynomial is then solved to find the eigenvalues\\[4mm]
+			An easy way to find eigenvalues for a 2x2 is by the formula
+			$$\lambda=m\pm\sqrt{m^2-p}$$
+			Where $m$ is the mean of the diagonal and $p$ is the determinant.\\[4mm]
+			In case of an upper triangle or lower triangle the diagonal is the eigen values.\\
+		\subsection{Finding eigenvectors}
+			To find the eigenvector first the eigen values have to be known.\\
+			Then the equation
+			$$(\lambda\cdot I-A)\times x=0$$
+			Where $x$ is the matrix of same size of $A$'s row and 0 is representing the zero vector.\\
+			Then a system of equation can be made and solved for. \\
+			The solutions can then be inserted in $x$ to find the eigenvector.
+		\subsection{Diagonalization}
+			Diagonalization describes the relation between eigenvalues, eigenvalues and the original vector
+			$$A=XDX^{-1}$$
+			Where $A$ is an matrix square with eigen values $\lambda_1,\lambda_2,...$\\
+			$X$ is the matrix consisting of the eigenvectors $[x_1,x_2,...]$ which all are linear independent\\
+			$D$ is the matrix consisting of 0's and the eigenvalues on the diagonal in the same order as the eigenvectors for $X$.\\[4mm]
+			In general the diagonalization where $B=P^{-1}AP$ it is said that $B$ and $A$ are similar and will share many similarities and proberties.\\
+			Diagnonalization is usefull since the eigenvalue to the power of the integer c is the eigenvalue to $A$ to the power of c\\
+			So the transformation using $X$ can be used to to transform $D$ to the wanted power
+	\section{Angles}
+		To find angles for objects the formula
+		$$\cos\theta = \frac{<u,v>}{||u||||v||}$$
+		Where $<u,v>$ is the inner product, which is a extension of dot product. Found by taking $a_1b_1+a_2b_2+...a_nb_n$.\\
+		$||u||$ is the length of $u$ found by taking $\sqrt{a_1^2+a_2^2+...+a_n^2}$.\\
+		The innerproduct and length has to following proberties
+		\begin{itemize}
+			\item $<u,v>^2\leq <u,u><v,v>$
+			\item $<u,v>^2\leq ||u||^2||v||^2$
+			\item $||u+v||\leq ||u||+||v||$
+			\item $d(u,v)\leq d(u,w)+d(w,v)$ where $d$ is the distance function
+			\item $<u,v>=0$ the angle will be $90^\circ$ there the objects are orthogonal
+			\item $||u+v||^2=||u||^2+||v||^2$
+		\end{itemize}
+		Orthogonal complements denoted $W^\perp$ are orthogonal objects for a subspace $W$ of $V$.\\
+		Ex. in $R^3$ and the subspace describing a plane the orthogonal complement is vector of which the whole plane the orthogonal to.\\
+		Therefore $W\cap W^\perp=\{0\}$ and $(W^\perp)^\perp=W$\\
+		\subsection{Orthonormal basis}
+			Orthonormal is the set of vectors in norm 1 which are orthogonal to an object.\\
+			By norm 1, it means that every value in the vector is divided by the length of the vector.\\
+			The orthonormal form can be seen to be linear independent and therefore a basis for $V$.\\
+			To then find a vector $u$ in the basis, it can be found as
+			$$u=\frac{<u,v_1>}{||v_1||^2}v_1+\frac{<u,v_2>}{||v_2||^2}v_2+...+\frac{<u,v_n>}{||v_n||^2}v_n$$
+			Or just by 
+			$$u=<u,v_1>v_1+<u,v_2>v_2+...+<u,v_n>v_n$$\\[4mm]
+			If $W$ is a finite dimensional subspace of innter product space $V$, then every vector $u$ in $V$ can be descirbed by\\
+			$$u=w_1+w^\perp$$
+			Where $w_1$ is in $W$\\
+			The projected vector $u$ is found by a linear combination of the basis vectors.
+		\subsection{Gram-Schmidt process for finding orthonormal basis}
+			The gram-schmidt process works by taking an orginal basis and turning it into orthogonal basis.\\
+			For the basis $B=\{b_1,b_2,...,b_n\}$ to the orthogonal basis $U=\{u_1,u_2,...,u_n\}$ it can be done by
+			$$u_k=b_k-\sum\limits_{i=i}^{k-1}\frac{<b_k,u_i}{|u_i|^2}u_i$$
+			Therefore mkaing the first three terms
+			\begin{align}
+				u_1=b_1\\
+				u_2=b_2-\frac{<b_2,u_1>}{|u_1|^2}u_1\\
+				u_3=b_3-\frac{<b_3,u_1>}{|u_1|^2}u_1-\frac{<b_3,u_2>}{|u_2|^2}u_2
+			\end{align}
+		\subsection{Orthogonal matrices}
+			A matrice which inverse is equal to the transpose is said to be orthogonal.\\
+			$$AA^T=A^A=I$$
+			$$A^{-1}=A^T$$
+			It can be seen that if $A$ is orthogonal the row and column vectors of $A$ form an orthonormal set in $R^n$ with the euclidean inner product\\
+			A product of orthogonal matrices is orthogonal.\\
+			if $A$ is orthogonal then $det(A)=1 \lor det(A)=-1$\\
+			$||Ax||=||x||$ for all $x$ in $R^n$ and $Ax\cdot Ay=x\cdot y$ for all $x$ and $y$ in $R^n$	
+		\subsection{Orthogonal diagonalization}
+			If $A$ and $B$ are square matrices, thenthey are  orthogonally similar matrices, if there exists an orthogonal matrix $P$ where $B=P^TAP$ and therefore $A=PBP^T$\\
+			$P^TAP=D$ $P$ orthogonally diagonalizes and $A$ is orthogonally diagonalizable\\
+			It can be seen that $A$ must be symmetric if it is orthogonally diagonalizable, and $A$ has an orthonormal set of $n$ eigenvectors.\\[4mm]
+			To find the orthogonal diagonalization, first the each eigenspace is found and the gram schmidt process is applied to find basis for each eigenvector.\\
+			Then a matrix $P$ is constructed from the eigenvectors in the columns. The diagonalization will then have the eigenvalues in the diagonal in the same order as the column vectors.\\[4mm]
+			The spectral decomposition comes from $A=PDP^T$ which can be written as $A=\lambda_1u_1u_1^T+\lambda_2u_2u_2^T+\lambda_nu_nu_n^T$\\
+			It can be seen that multiplying a vector $x$ to $A$, the result can be found by multiplying $x$ into each $\lambda uu^T$.\\
+			There can for $D$ be found matrices in the form of an upper right triagnle denoted $S$ and in the form of upper right triangle plus an extra diagonal denoted $H$.\\
+			These forms can help reduce the number of operations in algorithms.
 			
 			
-			
-			
+		
 				
 \end{document}
 

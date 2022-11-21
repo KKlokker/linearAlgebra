@@ -1,21 +1,35 @@
 public class matrixOperations {
     public static void main(String[] args) {
         fraction[][] matrix1 = intToFracMatrix(new int[][] {
-            {1,2,1},
-            {1,3,0}
+            {-1,2},
+            {1,-1}
         });
         fraction[][] matrix2 = intToFracMatrix(new int[][] {
-            {1,2,0},
-            {1,3,1}
+            {-3},
+            {5}
         });
-        fraction[][] identity = identity(3,3);
+
+        fraction[][] matrix3 = new fraction[][] {
+            {new fraction(1,1),new fraction(1)},
+            {new fraction(1),new fraction(-1,1)},
+        };
+        
+        System.out.println("------Transverse--------");
+        fraction[][] trans = copy(matrix3);
+        transpose(trans);
+        printMatrixDouble(trans);
+        System.out.println("------Inverse--------");
+        fraction[][] identity2 = identity(2,2);
+        eliminate(matrix3, 0, identity2);
+        printMatrixDouble(identity2);
+        fraction[][] identity = identity(2,4);
         fraction[][] copy = copy(matrix1);
         eliminate(copy, 0, identity);
-        eliminate(matrix2, 0, identity);
+        eliminate(matrix1, 0, identity);
         System.out.println("------Double echeleon--------");
         printMatrixDouble(copy);
         System.out.println("------Double echeleon--------");
-        printMatrixDouble(matrix2);
+        printMatrixDouble(matrix1);
         System.out.println("-------Inverse-------");
         printMatrixDouble(identity);
         System.out.println("------original--------");
